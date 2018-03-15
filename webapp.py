@@ -16,7 +16,7 @@ app.debug = True #Change this to False for production
 app.secret_key = os.environ['SECRET_KEY'] #used to sign session cookies
 oauth = OAuth(app)
 
-collection = connect_to_database()
+# collection = connect_to_database()
 
 #Set up GitHub as OAuth provider
 github = oauth.remote_app(
@@ -34,17 +34,17 @@ github = oauth.remote_app(
 #use a JSON file to store the past posts.  A global list variable doesn't work when handling multiple requests coming in and being handled on different threads
 #Create and set a global variable for the name of you JSON file here.  The file will be created on Heroku, so you don't need to make it in GitHub
 
-def connect_to_database():
-    url = 'mongodb://{}:{}@{}:{}/{}'.format(
-        os.environ["MONGO_USERNAME"],
-        os.environ["MONGO_PASSWORD"],
-        os.environ["MONGO_HOST"],
-        os.environ["MONGO_PORT"],
-        os.environ["MONGO_DBNAME"])
-
-    client = pymongo.MongoClient(url)
-    db = client[os.environ["MONGO_DBNAME"]]
-    return db['posts']
+# def connect_to_database():
+#     url = 'mongodb://{}:{}@{}:{}/{}'.format(
+#         os.environ["MONGO_USERNAME"],
+#         os.environ["MONGO_PASSWORD"],
+#         os.environ["MONGO_HOST"],
+#         os.environ["MONGO_PORT"],
+#         os.environ["MONGO_DBNAME"])
+#
+#     client = pymongo.MongoClient(url)
+#     db = client[os.environ["MONGO_DBNAME"]]
+#     return db['posts']
 
 @app.context_processor
 def inject_logged_in():
@@ -56,11 +56,11 @@ def home():
 
 def posts_to_html():
     forum_table = Markup("<table class='table table-bordered'> <tr> <th> Username </th> <th> Message </th> </tr>")
-    try:
-        for post in collection.find():
-            forum_table += Markup("<tr> <td>" + post["username"] + "</td> <td>" + post["message"] + "</td>")
-    except:
-        print("Unable to load database")
+    # try:
+    #     for post in collection.find():
+    #         forum_table += Markup("<tr> <td>" + post["username"] + "</td> <td>" + post["message"] + "</td>")
+    # except:
+    #     print("Unable to load database")
     forum_table += Markup("</table>")
     return forum_table
 
