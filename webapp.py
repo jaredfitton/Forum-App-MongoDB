@@ -16,13 +16,22 @@ app.debug = True #Change this to False for production
 app.secret_key = os.environ['SECRET_KEY'] #used to sign session cookies
 oauth = OAuth(app)
 
-collection = None
+url = 'mongodb://{}:{}@{}:{}/{}'.format(
+    os.environ["MONGO_USERNAME"],
+    os.environ["MONGO_PASSWORD"],
+    os.environ["MONGO_HOST"],
+    os.environ["MONGO_PORT"],
+    os.environ["MONGO_DBNAME"])
+
+client = pymongo.MongoClient(url)
+db = client[os.environ["MONGO_DBNAME"]]
+collection = db["posts"]
 
 #Set up GitHub as OAuth provider
 github = oauth.remote_app(
     'github',
     consumer_key=os.environ['GITHUB_CLIENT_ID'], #your web app's "username" for github's OAuth
-    consumer_secret=os.environ['GITHUB_CLIENT_SECRET'],#your web app's "password" for github's OAuth
+    consumer_secret=os.environ['GITHUB_CLIENT_SECRET'],#your dfweb app's "password" for github's OAuth
     request_token_params={'scope': 'user:email'}, #request read-only access to the user's email.  For a list of possible scopes, see developer.github.com/apps/building-oauth-apps/scopes-for-oauth-apps
     base_url='https://api.github.com/',
     request_token_url=None,
@@ -34,20 +43,6 @@ github = oauth.remote_app(
 #use a JSON file to store the past posts.  A global list variable doesn't work when handling multiple requests coming in and being handled on different threads
 #Create and set a global variable for the name of you JSON file here.  The file will be created on Heroku, so you don't need to make it in GitHub
 
-def main():
-    collection = connect_to_database()
-
-def connect_to_database():
-    url = 'mongodb://{}:{}@{}:{}/{}'.format(
-        os.environ["MONGO_USERNAME"],
-        os.environ["MONGO_PASSWORD"],
-        os.environ["MONGO_HOST"],
-        os.environ["MONGO_PORT"],
-        os.environ["MONGO_DBNAME"])
-
-    client = pymongo.MongoClient(url)
-    db = client[os.environ["MONGO_DBNAME"]]
-    return db['posts']
 
 @app.context_processor
 def inject_logged_in():
