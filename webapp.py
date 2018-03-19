@@ -16,7 +16,7 @@ app.debug = True #Change this to False for production
 app.secret_key = os.environ['SECRET_KEY'] #used to sign session cookies
 oauth = OAuth(app)
 
-collection = connect_to_database()
+collection = None
 
 #Set up GitHub as OAuth provider
 github = oauth.remote_app(
@@ -34,6 +34,8 @@ github = oauth.remote_app(
 #use a JSON file to store the past posts.  A global list variable doesn't work when handling multiple requests coming in and being handled on different threads
 #Create and set a global variable for the name of you JSON file here.  The file will be created on Heroku, so you don't need to make it in GitHub
 
+def main():
+    collection = connect_to_database()
 
 def connect_to_database():
     url = 'mongodb://{}:{}@{}:{}/{}'.format(
