@@ -56,7 +56,7 @@ def posts_to_html():
     forum_table = Markup("<table class='table table-bordered'> <tr> <th> Username </th> <th> Message </th> </tr>")
     try:
         for post in collection.find():
-            # forum_table += Markup("<tr> <td>" + post["username"] + "</td> <td>" + post["message"] + "</td>")
+            forum_table += Markup("<tr> <td>" + post['username'] + "</td> <td>" + post['message'] + "</td>")
             pprint.pprint(post)
     except:
         print("Unable to convert to HTML")
