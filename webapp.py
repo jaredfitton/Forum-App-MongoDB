@@ -68,14 +68,9 @@ def post():
     username = session['user_data']['login']
     message = request.form['message']
     try:
-        with open('forum.json', 'r+') as f:
-            data = json.load(f)
-            data.append({"username":username, "message":message})
-            f.seek(0)
-            f.truncate()
-            json.dump(data, f)
+        collection.insert( { username: username, message: message } )
     except Exception as e:
-        print("Unable to load JSON :(")
+        print("Unable to post :(")
         print(e)
 
     return render_template('home.html', past_posts = posts_to_html())
