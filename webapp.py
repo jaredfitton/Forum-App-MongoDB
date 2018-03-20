@@ -69,7 +69,7 @@ def post():
     username_local = session['user_data']['login']
     message_local = request.form['message']
     try:
-        collection.insert( { username: username_local, message: message_local } )
+        collection.insert( { "username": username_local, "message": message_local } )
     except Exception as e:
         print("Unable to post :(")
         print(e)
