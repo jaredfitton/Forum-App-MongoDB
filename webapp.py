@@ -60,7 +60,7 @@ def posts_to_html():
             print("got into for collection.find")
             # {'_id': ObjectId('5ab3df4f0bac5800099e1fd4')
 
-            docid=String(post["_id"])
+            docid=str(post["_id"])
             print(docid)
             pprint.pprint(post)
             forum_table += Markup("<tr> <td>" + post["username"] + "</td> <td>" + post["message"] + "</td>")
