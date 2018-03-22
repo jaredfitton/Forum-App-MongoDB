@@ -59,7 +59,7 @@ def posts_to_html():
             print("got into for collection.find")
             pprint.pprint(post)
             forum_table += Markup("<tr> <td>" + post["username"] + "</td> <td>" + post["message"] + "</td>")
-            if session['user_data']['login'] == i["username"]: #we session user is the same as poster
+            if session['user_data']['login'] == post["username"]: #we session user is the same as poster
                 print("got into if session[user_data][login]")
                 forum_table += Markup("<td>" + '<button type="button" class="btn btn-secondary">Delete</button>' + "</td>" + "</tr>") #adds another column to the table with a delete button this is the code jared needs
     except Exception as e:
