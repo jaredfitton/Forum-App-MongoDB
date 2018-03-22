@@ -58,11 +58,15 @@ def posts_to_html():
         for post in collection.find():
             print(post["_id"])
             print("got into for collection.find")
+            # {'_id': ObjectId('5ab3df4f0bac5800099e1fd4')
+
+            docid=String(post["_id"])
+            print(doid)
             pprint.pprint(post)
             forum_table += Markup("<tr> <td>" + post["username"] + "</td> <td>" + post["message"] + "</td>")
             if session['user_data']['login'] == post["username"]: #we session user is the same as poster
                 print("got into if session[user_data][login]")
-                forum_table += Markup("<td>" + '<button type="button" class="btn btn-secondary">Delete</button>' + "</td>" + "</tr>") #adds another column to the table with a delete button this is the code jared needs
+                forum_table += Markup("<td>" + '<button value="docid" type="button" class="btn btn-secondary">Delete</button>' + "</td>" + "</tr>") #adds another column to the table with a delete button this is the code jared needs
     except Exception as e:
         print("Unable to convert to HTML")
         print(e)
