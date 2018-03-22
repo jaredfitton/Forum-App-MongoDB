@@ -1,7 +1,6 @@
 from flask import Flask, redirect, url_for, session, request, jsonify, Markup
 from flask_oauthlib.client import OAuth
 from flask import render_template
-from bson.objectid import ObjectId
 
 import pymongo
 import pprint
@@ -57,9 +56,7 @@ def posts_to_html():
     forum_table = Markup("<table class='table table-bordered'> <tr> <th> Username </th> <th> Message </th> </tr>")
     try:
         for post in collection.find():
-            # print post["_id"]
             print(post["_id"])
-            # {"_id": ObjectId(obj_id_to_find)}the query for the find   {'_id': ObjectId('5ab3df4f0bac5800099e1fd4')** this is what it printed
             print("got into for collection.find")
             pprint.pprint(post)
             forum_table += Markup("<tr> <td>" + post["username"] + "</td> <td>" + post["message"] + "</td>")
