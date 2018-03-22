@@ -58,6 +58,8 @@ def posts_to_html():
     try:
         for post in collection.find():
             # print post["_id"]
+            print(post["_id"])
+            # {"_id": ObjectId(obj_id_to_find)} 
             print("got into for collection.find")
             pprint.pprint(post)
             forum_table += Markup("<tr> <td>" + post["username"] + "</td> <td>" + post["message"] + "</td>")
