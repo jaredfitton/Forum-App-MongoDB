@@ -7,6 +7,7 @@ import pprint
 import os
 import json
 import bson
+import ObjectId
 
 os.system("echo '[]'>" + 'forum.json')
 
