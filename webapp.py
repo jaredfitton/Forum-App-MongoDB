@@ -6,6 +6,7 @@ import pymongo
 import pprint
 import os
 import json
+import bson
 
 os.system("echo '[]'>" + 'forum.json')
 
