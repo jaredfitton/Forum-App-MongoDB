@@ -61,7 +61,7 @@ def posts_to_html():
             # {'_id': ObjectId('5ab3df4f0bac5800099e1fd4')
 
             docid=String(post["_id"])
-            print(doid)
+            print(docid)
             pprint.pprint(post)
             forum_table += Markup("<tr> <td>" + post["username"] + "</td> <td>" + post["message"] + "</td>")
             if session['user_data']['login'] == post["username"]: #we session user is the same as poster
