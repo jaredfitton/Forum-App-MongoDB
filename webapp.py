@@ -54,8 +54,8 @@ def home():
 
 def posts_to_html():
     forum_table = Markup("<table class='table table-bordered'> <tr> <th> Username </th> <th> Message </th> </tr>")
-    try:
-        for post in collection.find():
+    for post in collection.find():
+        try:
             print(post["_id"])
             print("got into for collection.find")
             # {'_id': ObjectId('5ab3df4f0bac5800099e1fd4')
@@ -67,9 +67,8 @@ def posts_to_html():
             if session['user_data']['login'] == post["username"]: #we session user is the same as poster
                 print("got into if session[user_data][login]")
                 forum_table += Markup("<td>" + '<button value="docid" type="button" class="btn btn-secondary">Delete</button>' + "</td>" + "</tr>") #adds another column to the table with a delete button this is the code jared needs
-    except Exception as e:
-        print("Unable to convert to HTML")
-        print(e)
+        except Exception as e:
+            print(e)
     forum_table += Markup("</table>")
     return forum_table
 
