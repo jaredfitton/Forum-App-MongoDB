@@ -74,7 +74,7 @@ def posts_to_html():
     return forum_table
 
 @app.route('/delete', methods=['POST'])
-    def delete:
+    def delete():
         # collection.deleteOne()
         print("delete")
 
