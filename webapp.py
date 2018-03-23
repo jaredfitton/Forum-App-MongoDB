@@ -61,11 +61,10 @@ def posts_to_html():
             # {'_id': ObjectId('5ab3df4f0bac5800099e1fd4')
 
             docid=str(post["_id"])
-            print(docid)
+            # print(docid)
             pprint.pprint(post)
             forum_table += Markup("<tr> <td>" + post["username"] + "</td> <td>" + post["message"] + "</td>")
             if session['user_data']['login'] == post["username"]: #we session user is the same as poster
-                print("got into if session[user_data][login]")
                 forum_table += Markup("<form action = '/delete' method = 'post'> <tr> <td> <button value='test' type='button' class='btn btn-secondary'>Delete</button> </td> </tr> </form>")
                  #adds another column to the table with a delete button this is the code jared needs
         except Exception as e:
