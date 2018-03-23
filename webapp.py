@@ -66,7 +66,7 @@ def posts_to_html():
             forum_table += Markup("<tr> <td>" + post["username"] + "</td> <td>" + post["message"] + "</td>")
             if session['user_data']['login'] == post["username"]: #we session user is the same as poster
                 print("got into if session[user_data][login]")
-                forum_table += Markup( "<tr> <td> <button value='test' type='button' class='btn btn-secondary'>Delete</button> </td> </tr>")
+                forum_table += Markup()# "<tr> <td> <button value='test' type='button' class='btn btn-secondary'>Delete</button> </td> </tr>")
                 # "<form action = '/delete' method = 'post'> #adds another column to the table with a delete button this is the code jared needs
         except Exception as e:
             print(e)
