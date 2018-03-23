@@ -75,7 +75,7 @@ def posts_to_html():
 def delete():
     print(request.form["delete"])
 
-    return render_template('home.html', past_posts = posts_to_html)
+    return render_template('home.html', past_posts = posts_to_html())
 
 
 @app.route('/posted', methods=['POST'])
