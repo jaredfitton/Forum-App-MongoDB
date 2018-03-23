@@ -62,7 +62,6 @@ def posts_to_html():
 
             docid=str(post["_id"])
             # print(docid)
-            pprint.pprint(post)
             forum_table += Markup("<tr> <td>" + post["username"] + "</td> <td>" + post["message"] + "</td>")
             if session['user_data']['login'] == post["username"]: #we session user is the same as poster
                 forum_table += Markup('<form action = "/delete" method = "post"> <tr> <td> <button value="docid" type="button" name="delete" class="btn btn-secondary">Delete</button> </td> </tr> </form>')
