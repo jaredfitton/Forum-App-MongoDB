@@ -73,10 +73,10 @@ def posts_to_html():
     forum_table += Markup("</table>")
     return forum_table
 
-# @app.route('/delete', methods=['POST'])
-#     def delete:
-#         # collection.deleteOne()
-#         print("delete")
+@app.route('/delete', methods=['POST'])
+    def delete:
+        # collection.deleteOne()
+        print("delete")
 
 @app.route('/posted', methods=['POST'])
 def post():
