@@ -82,7 +82,7 @@ def delete():
 
     collection.delete_one({'_id': ObjectId(docid)})
 
-    return render_template('home.html', past_posts = posts_to_html)
+    return render_template('home.html', past_posts = posts_to_html())
 
 
 @app.route('/posted', methods=['POST'])
