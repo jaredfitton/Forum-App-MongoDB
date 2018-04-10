@@ -61,11 +61,14 @@ def posts_to_html():
             # {'_id': ObjectId('5ab3df4f0bac5800099e1fd4')
 
             docid=str(post["_id"])
+
+            print(docid)
             # print(docid)
-            forum_table += Markup("<tr> <td>" + post["username"] + "</td> <td>" + post["message"] + "</td>")
+            forum_table += Markup("<tr> <td>" + post["username"] + "</td> <td>" + post["message"])
             if session['user_data']['login'] == post["username"]: #we session user is the same as poster
-                forum_table += Markup('<form action = "/delete" method = "post"> <tr> <td> <button value="Works" type="submit" name="delete" class="btn btn-secondary">Delete</button> </td> </tr> </form>')
+                forum_table += Markup('<form action = "/delete" method = "post"> <button value=' + docid + ' type="submit" name="delete" class="btn btn-secondary">Delete</button> </form>')
                  #adds another column to the table with a delete button this is the code jared needs
+            forum_table += Markup("</td> </tr>")
         except Exception as e:
             print(e)
     forum_table += Markup("</table>")
@@ -73,7 +76,11 @@ def posts_to_html():
 
 @app.route('/delete', methods=['POST'])
 def delete():
-    print(request.form["delete"])
+    print("In delete method" + request.form["delete"])
+
+    docid = request.form["delete"]
+
+    collection.delete_one({'_id': ObjectId(docid)})
 
     return render_template('home.html', past_posts = posts_to_html)
 
